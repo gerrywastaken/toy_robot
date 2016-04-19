@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+# I am enabling frozen strings via the command line switch
+# (--enable-frozen-string-literal), so as not to polute every file with an
+# unnecessary comment flag. This setting turns off the incorrect warnings.
+Style/FrozenStringLiteralComment:
+  Enabled: false
