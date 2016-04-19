@@ -7,7 +7,8 @@ end
 group :development do
   # Linting tools
   gem 'reek'
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'guard-rubocop'
 end
 
 group :test do
