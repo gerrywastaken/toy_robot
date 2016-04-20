@@ -11,10 +11,12 @@ group :development do
 
   gem 'reek', require: false
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
   gem 'rspec'
+  gem 'fuubar', require: false # Allows seeing failures immediately
 
   gem 'pry-rescue' # inspecting failing tests
   gem 'pry-stack_explorer' # needed by pry-rescue
