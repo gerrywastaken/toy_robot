@@ -1,2 +1,3 @@
 #!/usr/bin/env ruby --enable-frozen-string-literal
 puts 'I, robot'
+require './lib/parser.rb'

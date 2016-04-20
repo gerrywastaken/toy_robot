@@ -14,3 +14,7 @@ UncommunicativeVariableName:
   exclude:
   - CoreExtensions#on_heredoc_dedent
   - CoreExtensions#on_heredoc_dedent
+UtilityFunction:
+  exclude:
+  # Intentional to keep specs simple
+  - SpecHelpers#arguments_hash
