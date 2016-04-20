@@ -31,7 +31,30 @@ guard :rspec, cmd: 'bundle exec rspec' do
   dsl.watch_spec_files_for(ruby.lib_files)
 end
 
-guard :rubocop do
+# guard-yield:
+#
+# Instead of adding an entire gem (e.g. guard-rubocop, guard-reek) for each
+# command we want guard to execute, guard-yield allows use to just execute the
+# command and pass a list of changed files.
+misc_guard = proc do |_guard, _command, files|
+  files = Array(files)
+
+  puts 'Reek checks'
+  puts `reek --color #{files.join}`
+
+  puts 'RuboCop checks'
+  puts `rubocop --color #{files.join}`
+end
+
+yield_commands = {
+  start: misc_guard,
+  run_all: misc_guard,
+  reload: misc_guard,
+  run_on_additions: misc_guard,
+  run_on_modifications: misc_guard,
+  run_on_changes: misc_guard
+}
+
+guard :yield, yield_commands do
   watch(/.+\.rb$/)
-  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
 end

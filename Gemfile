@@ -6,15 +6,18 @@ end
 
 group :development do
   # Linting tools
-  gem 'reek'
+  gem 'guard-yield' # run a proc that on guard hooks without extra gems
+  gem 'guard-rspec', require: false # rerun tests
+
+  gem 'reek', require: false
   gem 'rubocop', require: false
-  gem 'guard-rubocop'
 end
 
 group :test do
   gem 'rspec'
+
   gem 'pry-rescue' # inspecting failing tests
   gem 'pry-stack_explorer' # needed by pry-rescue
-  gem 'guard-rspec' # reruns tests
+
   gem 'simplecov', require: false
 end
