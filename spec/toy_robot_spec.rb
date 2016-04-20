@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe 'toy_robot provided specs' do
+describe 'toy_robot provided specs', type: :feature do
   def pipe_commands(command_string)
     `echo '#{command_string}' | ./toy_robot`
   end

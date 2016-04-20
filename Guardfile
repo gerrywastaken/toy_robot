@@ -14,7 +14,10 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: 'bundle exec rspec' do
+# bundler 1.12.0 will support frozen strings, but until then I will run rspec
+# outside of bundler
+# guard :rspec, cmd: 'bundle exec rspec' do
+guard :rspec, cmd: 'rspec' do
   require 'guard/rspec/dsl'
   dsl = Guard::RSpec::Dsl.new(self)
 
