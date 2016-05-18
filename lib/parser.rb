@@ -3,7 +3,6 @@ require_relative 'exceptions'
 # Takes a string and turns it into a toy_robot command and arguments
 class Parser
   def read(input_line)
-    parse(input_line)
     @command, @arguments = split(input_line)
     {
       command: command,
@@ -60,12 +59,6 @@ class Parser
     else
       raise ParseError, "Error: invalid direction [#{direction}]"
     end
-  end
-
-  def parse(input_line)
-    command = {} # reset any previous commands
-    command[:name], command[:x_pos], command[:y_pos], command[:facing] =
-      split(input_line)
   end
 
   def split(input_line)
