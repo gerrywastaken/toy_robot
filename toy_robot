@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby --enable-frozen-string-literal
-puts 'I, robot'
-require './lib/parser.rb'
+require './lib/command_processor'
+
+command_processor = CommandProcessor.build
+
+# Only execute when called from the command line, not when loaded via rspec
+command_processor.run if $PROGRAM_NAME == __FILE__
