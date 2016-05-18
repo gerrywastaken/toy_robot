@@ -4,14 +4,49 @@ class Robot
     new
   end
 
-  def initialize
+  def place(x_pos, y_pos, direction)
+    @x_pos = x_pos
+    @y_pos = y_pos
+    @direction = direction
+    true
   end
 
-  def place(x_pos, y_pos, direction)
-    @position = "#{x_pos},#{y_pos},#{direction.upcase}"
+  def placed?
+    @direction
+  end
+
+  # Moves the robot one step in it's current direction.
+  # This takes a block. It puts it's life in your hands by checking this block
+  # to see if it's next move will be a safe one. If you lie, it will take you
+  # at your word and the oil will be on your hands!
+  def move(&_is_valid_position)
+    if placed?
+      new_position = next_move
+      if yield(new_position)
+        @x_pos, @y_pos = new_position
+      else
+        raise InvalidMove, "Error: Invalid move #{new_position}"
+      end
+    end
   end
 
   def report
-    @position
+    "#{@x_pos},#{@y_pos},#{@direction.upcase}" if placed?
+  end
+
+  protected
+
+  # Calculates the new postion one square in the direction the robot is facing.
+  def next_move
+    case @direction
+    when :north
+      [@x_pos, @y_pos + 1]
+    when :south
+      [@x_pos, @y_pos - 1]
+    when :east
+      [@x_pos + 1, @y_pos]
+    when :west
+      [@x_pos - 1, @y_pos]
+    end
   end
 end

@@ -23,13 +23,16 @@ class Instructor
     end
   end
 
-  def move; end
+  def move
+    @robot.move { |x_pos, y_pos| @platform.valid_position?(x_pos, y_pos) }
+  end
 
   def left; end
 
   def right; end
 
   def report
-    print @robot.report
+    report = @robot.report
+    puts report if report
   end
 end
