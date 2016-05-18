@@ -3,6 +3,16 @@ require 'spec_helper'
 describe Robot do
   let(:subject) { described_class.build }
 
+  describe 'before placed' do
+    it 'returns nil if asked to report ' do
+      expect(subject.report).to be_nil
+    end
+
+    it 'returns nil if asked to move' do
+      expect(subject.move).to be_nil
+    end
+  end
+
   context 'valid' do
     it 'returns true after a place has completed' do
       expect(subject.place(2, 3, :north)).to be(true)
