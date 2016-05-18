@@ -7,6 +7,14 @@ describe Instructor do
     expect(subject.place(0, 0, :north)).to be(true)
   end
 
+  it 'allows turning' do
+    subject.place(0, 0, :north)
+    subject.left
+    expect { subject.report }.to output("0,0,WEST\n").to_stdout
+    subject.right
+    expect { subject.report }.to output("0,0,NORTH\n").to_stdout
+  end
+
   it 'allows moving' do
     subject.place(0, 0, :north)
     subject.move

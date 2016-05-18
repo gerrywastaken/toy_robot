@@ -1,8 +1,12 @@
+require 'forwardable'
 require './lib/table'
 require './lib/robot'
 
 # Dispatches recieved commands to appropriate parts of the system.
 class Instructor
+  extend Forwardable
+  def_delegators :@robot, :left, :right
+
   def self.build(width: 5, height: 5)
     platform = Table.new(width, height)
     robot = Robot.build
@@ -26,10 +30,6 @@ class Instructor
   def move
     @robot.move { |x_pos, y_pos| @platform.valid_position?(x_pos, y_pos) }
   end
-
-  def left; end
-
-  def right; end
 
   def report
     report = @robot.report

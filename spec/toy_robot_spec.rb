@@ -75,8 +75,6 @@ describe 'toy_robot', type: :feature do
 
     describe 'example 2' do
       it 'reports a left turn' do
-        pending 'Still to be implimented'
-
         commands = <<~cmd.chomp
           PLACE 0,0,NORTH
           LEFT
@@ -89,8 +87,6 @@ describe 'toy_robot', type: :feature do
 
     describe 'example 3' do
       it 'reports a move and turn combination' do
-        pending 'Still to be implimented'
-
         commands = <<~cmd.chomp
           PLACE 1,2,EAST
           MOVE

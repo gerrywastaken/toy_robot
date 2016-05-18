@@ -39,6 +39,26 @@ describe Robot do
       subject.place(2, 7, :south)
       expect(subject.report).to eql('2,7,SOUTH')
     end
+
+    it 'can turn left' do
+      subject.place(0, 0, :east)
+      expect(subject.left).to be(:north)
+      expect(subject.report).to eql('0,0,NORTH')
+      expect(subject.left).to be(:west)
+      expect(subject.left).to be(:south)
+      expect(subject.left).to be(:east)
+      expect(subject.report).to eql('0,0,EAST')
+    end
+
+    it 'can turn right' do
+      subject.place(0, 0, :west)
+      expect(subject.right).to be(:north)
+      expect(subject.report).to eql('0,0,NORTH')
+      expect(subject.right).to be(:east)
+      expect(subject.right).to be(:south)
+      expect(subject.right).to be(:west)
+      expect(subject.report).to eql('0,0,WEST')
+    end
   end
 
   context 'assuming valid move' do

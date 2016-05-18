@@ -1,7 +1,13 @@
+require 'circular_list'
+
 # Handle robot movement
 class Robot
   def self.build
-    new
+    new(CircularList::List.new(valid_directions))
+  end
+
+  def initialize(direction_helper)
+    @direction_helper = direction_helper
   end
 
   def place(x_pos, y_pos, direction)
@@ -35,7 +41,18 @@ class Robot
     "#{@x_pos},#{@y_pos},#{@direction.upcase}" if placed?
   end
 
+  def left
+    @direction = @direction_helper.fetch_before(@direction)
+  end
+
+  def right
+    @direction = @direction_helper.fetch_after(@direction)
+  end
+
   def self.valid_directions
+    # The order of this list matters. Moving to the next index in order should
+    # be the same as turning right. This is used in a circular list, so the
+    # first element should also be to the right of the last element.
     [:north, :east, :south, :west]
   end
 

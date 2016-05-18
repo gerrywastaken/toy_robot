@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'circular_list' # Used to make robot turning robot and readable
+
 group :development, :test do
   gem 'rake'
 end
