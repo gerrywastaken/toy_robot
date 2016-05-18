@@ -29,7 +29,7 @@ class CommandProcessor
     else
       @instructor.send(command)
     end
-  rescue ParseError => exception
+  rescue ParseError, OutsideBounds => exception
     puts exception.message
   end
 end

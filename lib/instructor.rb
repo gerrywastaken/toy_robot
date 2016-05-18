@@ -1,16 +1,23 @@
+require './lib/table'
+
 # Dispatches recieved commands to appropriate parts of the system.
 class Instructor
   def self.build(width: 5, height: 5)
-    new(width, height)
+    platform = Table.new(width, height)
+    new(platform)
   end
 
-  def initialize(width, height)
-    @width = width
-    @height = height
+  def initialize(platform)
+    @platform = platform
   end
 
   def place(x_pos, y_pos, direction)
-    @position = "#{x_pos},#{y_pos},#{direction.upcase}"
+    if @platform.valid_position?(x_pos, y_pos)
+      @position = "#{x_pos},#{y_pos},#{direction.upcase}"
+    else
+      raise OutsideBounds,
+            "Error: coordinates are not on the table [#{x_pos},#{y_pos}]"
+    end
   end
 
   def move; end

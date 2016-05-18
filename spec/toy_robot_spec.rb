@@ -32,6 +32,32 @@ describe 'toy_robot', type: :feature do
       command_output_match "PLACE 0,0,MAGNETIC_NORTH\nREPORT",
                            'Error: invalid direction [MAGNETIC_NORTH]'
     end
+
+    it 'will not perform action if command is invalid' do
+      command_output_match 'PACE 0,0,NORTH', 'Error: invalid command [PACE]'
+    end
+
+    describe 'will not be placed off the table when' do
+      it 'recieves a negative column' do
+        error = 'Error: coordinates are not on the table [-1,0]'
+        command_output_match "PLACE -1,0,NORTH\nREPORT", error
+      end
+
+      it 'recieves a negative row' do
+        error = 'Error: coordinates are not on the table [0,-1]'
+        command_output_match "PLACE 0,-1,NORTH\nREPORT", error
+      end
+
+      it 'recieves to high of a column' do
+        error = 'Error: coordinates are not on the table [5,0]'
+        command_output_match "PLACE 5,0,NORTH\nREPORT", error
+      end
+
+      it 'recieves too high of a row' do
+        error = 'Error: coordinates are not on the table [0,5]'
+        command_output_match "PLACE 0,5,NORTH\nREPORT", error
+      end
+    end
   end
 
   describe 'provided specs' do
