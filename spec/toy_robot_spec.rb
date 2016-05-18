@@ -83,20 +83,27 @@ describe 'toy_robot', type: :feature do
 
   private
 
+  # Sends a command to our program via piped standard imput and returns it's
+  # output
   def pipe_commands(command_string)
     `echo '#{command_string}' | ./toy_robot`
   end
 
-  def command_output_match_through(commands, expected_output)
+  # Pipe commands to our toy robot program for slow but realistic testing
+  def command_output_match_thorough(commands, expected_output)
     command_output = pipe_commands(commands).chomp
     expect(command_output).to eql(expected_output)
   end
 
+  # Pipe commands directly to the command processor for faster but less
+  # realistic tests
   def command_output_match_fast(commands, expected_output)
     commands = commands.split("\n") if commands.respond_to?(:split)
-    expect { main(commands) }.to output(expected_output + "\n").to_stdout
+    command_processor = CommandProcessor.build(input: commands)
+    expect { command_processor.run }.to output(expected_output + "\n").to_stdout
   end
 
+  # Checks the output of a piped command against an expectation
   def command_output_match(commands, expected_output)
     if ENV['SPEC_FASTER'] == 'true'
       command_output_match_fast(commands, expected_output)
