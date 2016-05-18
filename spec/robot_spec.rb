@@ -20,8 +20,16 @@ describe Robot do
       expect(subject.report).to be_nil
     end
 
+    it 'returns nil if asked to turn left' do
+      expect(subject.left).to be_nil
+    end
+
+    it 'returns nil if asked to turn right' do
+      expect(subject.right).to be_nil
+    end
+
     it 'returns nil if asked to move' do
-      expect(subject.move).to be_nil
+      expect(subject.move { true } ).to be_nil
     end
   end
 
@@ -93,13 +101,6 @@ describe Robot do
     it 'does not move' do
       subject.place(0, 0, :north)
       expect { subject.move { false } }.to raise_error(InvalidMove)
-    end
-  end
-
-  context 'assuming not yet placed' do
-    it 'does not mov' do
-      subject.move { true }
-      expect(subject.report).to eql(nil)
     end
   end
 end
