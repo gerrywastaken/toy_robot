@@ -15,6 +15,11 @@ describe Instructor do
     expect { subject.report }.to output("0,0,NORTH\n").to_stdout
   end
 
+  it 'outputs an error when a move is invalid' do
+    subject.place(0, 0, :south)
+    expect { subject.move }.to output("Error: Invalid move [0, -1]\n").to_stdout
+  end
+
   it 'allows moving' do
     subject.place(0, 0, :north)
     subject.move

@@ -58,6 +58,53 @@ describe 'toy_robot', type: :feature do
         command_output_match "PLACE 0,5,NORTH\nREPORT", error
       end
     end
+
+    it 'can walk the table' do
+      commands = <<~cmd.chomp
+        PLACE 0,0,NORTH
+        RIGHT
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        REPORT
+        LEFT
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        REPORT
+        LEFT
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        REPORT
+        LEFT
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        MOVE
+        REPORT
+      cmd
+
+      expected_output = <<~out.strip
+        Error: Invalid move [5, 0]
+        4,0,EAST
+        Error: Invalid move [4, 5]
+        4,4,NORTH
+        Error: Invalid move [-1, 4]
+        0,4,WEST
+        Error: Invalid move [0, -1]
+        0,0,SOUTH
+      out
+
+      command_output_match(commands, expected_output)
+    end
   end
 
   describe 'provided specs' do
