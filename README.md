@@ -30,7 +30,7 @@ The following is assumed to be a mistake:
 As such I have interpreted the statement as "A robot that is not on the table should ignore the MOVE, LEFT, RIGHT and REPORT commands."
 
 
-Example Input and Output
+Example input and output
 ------------------------
 ```
 a)
@@ -54,3 +54,11 @@ MOVE
 REPORT
 Output: 3,3,NORTH
 ```
+
+Reasoning behind decisions
+--------------------------
+
+shared_examples in tests
+  I want it to be explicit when two tests only differ in the test data. I use Rspec's shared_examples functionality to separate the things that change between each test, from the things that do not. In tests where this is not done, it is easy to miss that one test that is testing is a slightly different way to the tests that surround it.
+
+  While many prefer to duplicate code between tests so tests are isolated from each other, I think grouping test logic can be a huge benefit if done sparingly. However I do realize that much of this is subjective.
