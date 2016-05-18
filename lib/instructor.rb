@@ -1,19 +1,22 @@
 require './lib/table'
+require './lib/robot'
 
 # Dispatches recieved commands to appropriate parts of the system.
 class Instructor
   def self.build(width: 5, height: 5)
     platform = Table.new(width, height)
-    new(platform)
+    robot = Robot.build
+    new(platform, robot)
   end
 
-  def initialize(platform)
+  def initialize(platform, robot)
     @platform = platform
+    @robot = robot
   end
 
   def place(x_pos, y_pos, direction)
     if @platform.valid_position?(x_pos, y_pos)
-      @position = "#{x_pos},#{y_pos},#{direction.upcase}"
+      @robot.place(x_pos, y_pos, direction)
     else
       raise OutsideBounds,
             "Error: coordinates are not on the table [#{x_pos},#{y_pos}]"
@@ -27,6 +30,6 @@ class Instructor
   def right; end
 
   def report
-    print @position
+    print @robot.report
   end
 end
