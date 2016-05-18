@@ -5,6 +5,7 @@ class Robot
   end
 
   def place(x_pos, y_pos, direction)
+    ensure_valid_direction(direction)
     @x_pos = x_pos
     @y_pos = y_pos
     @direction = direction
@@ -34,6 +35,10 @@ class Robot
     "#{@x_pos},#{@y_pos},#{@direction.upcase}" if placed?
   end
 
+  def self.valid_directions
+    [:north, :east, :south, :west]
+  end
+
   protected
 
   # Calculates the new postion one square in the direction the robot is facing.
@@ -48,5 +53,12 @@ class Robot
     when :west
       [@x_pos - 1, @y_pos]
     end
+  end
+
+  # This should be caught by a parsing stage. This is just a backup check in
+  # case something goes wrong.
+  def ensure_valid_direction(direction)
+    raise InvalidDirextion unless
+      self.class.valid_directions.include?(direction)
   end
 end

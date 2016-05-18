@@ -3,6 +3,18 @@ require 'spec_helper'
 describe Robot do
   let(:subject) { described_class.build }
 
+  context 'invalid' do
+    it 'raises exception if asked to face in an invalid direction' do
+      expect { subject.place(5, 4, :magnetic_north) }
+        .to raise_error(InvalidDirextion)
+    end
+
+    it 'raises exception if asked to face in an invalid direction' do
+      expect { subject.place(5, 4, :magnetic_north) }
+        .to raise_error(InvalidDirextion)
+    end
+  end
+
   describe 'before placed' do
     it 'returns nil if asked to report ' do
       expect(subject.report).to be_nil
