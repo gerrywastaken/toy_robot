@@ -40,7 +40,7 @@ describe Instructor do
 
     context 'valid place' do
       it 'returns true from a successful place' do
-        expect(subject.place(0, 0, :north)).to be(true)
+        expect(subject.place(0, 0, :north)).to be_truthy
       end
 
       it 'allows placing at 0,4' do

@@ -35,7 +35,7 @@ describe Robot do
 
   context 'valid' do
     it 'returns true after a place has completed' do
-      expect(subject.place(2, 3, :north)).to be(true)
+      expect(subject.place(2, 3, :north)).to be_truthy
     end
 
     it 'reports current status' do

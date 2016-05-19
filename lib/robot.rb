@@ -15,7 +15,7 @@ class Robot
     @x_pos = x_pos
     @y_pos = y_pos
     @direction = direction
-    true
+    self
   end
 
   def placed?
@@ -27,14 +27,15 @@ class Robot
   # to see if it's next move will be a safe one. If you lie, it will take you
   # at your word and the oil will be on your hands!
   def move(&_is_valid_position)
-    if placed?
-      new_position = next_move
-      if yield(new_position)
-        @x_pos, @y_pos = new_position
-      else
-        raise InvalidMove, "Error: Invalid move #{new_position}"
-      end
+    return unless placed?
+
+    new_position = next_move
+    if yield(new_position)
+      @x_pos, @y_pos = new_position
+    else
+      raise InvalidMove, "Error: Invalid move #{new_position}"
     end
+    self
   end
 
   def report
@@ -42,11 +43,15 @@ class Robot
   end
 
   def left
+    return unless placed?
     @direction = @direction_helper.fetch_before(@direction)
+    self
   end
 
   def right
+    return unless placed?
     @direction = @direction_helper.fetch_after(@direction)
+    self
   end
 
   def self.valid_directions
