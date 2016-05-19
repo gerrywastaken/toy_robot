@@ -1,41 +1,31 @@
 require 'spec_helper'
 
+shared_examples 'out_of_bounds' do |x_pos, y_pos|
+  it "does not allow placing at #{x_pos}, #{y_pos}" do
+    expect { subject.place(x_pos, y_pos, :north) }
+      .to raise_error(
+        OutsideBounds,
+        "Error: coordinates are not on the table [#{x_pos},#{y_pos}]"
+      )
+  end
+end
+
+shared_examples 'within_bounds' do |x_pos, y_pos|
+  it "allows placing at #{x_pos}, #{y_pos}" do
+    subject.place(x_pos, y_pos, :north)
+    expect { subject.report }.to output("#{x_pos},#{y_pos},NORTH\n").to_stdout
+  end
+end
+
 describe Instructor do
   subject { described_class.build }
 
   describe 'with bounds 5x5' do
     context 'invalid place' do
-      it 'does not allow placing at -1 on x axis' do
-        expect { subject.place(-1, 0, :north) }
-          .to raise_error(
-            OutsideBounds,
-            'Error: coordinates are not on the table [-1,0]'
-          )
-      end
-
-      it 'does not allow placing at -1 on y axis' do
-        expect { subject.place(0, -1, :north) }
-          .to raise_error(
-            OutsideBounds,
-            'Error: coordinates are not on the table [0,-1]'
-          )
-      end
-
-      it 'does not allow placing at 5 on x axis' do
-        expect { subject.place(5, 0, :north) }
-          .to raise_error(
-            OutsideBounds,
-            'Error: coordinates are not on the table [5,0]'
-          )
-      end
-
-      it 'does not allow placing at 5 on y axis' do
-        expect { subject.place(0, 5, :north) }
-          .to raise_error(
-            OutsideBounds,
-            'Error: coordinates are not on the table [0,5]'
-          )
-      end
+      include_examples 'out_of_bounds', -1, 0
+      include_examples 'out_of_bounds', 0, -1
+      include_examples 'out_of_bounds', 5, 0
+      include_examples 'out_of_bounds', 0, 5
     end
 
     context 'valid place' do
@@ -43,15 +33,8 @@ describe Instructor do
         expect(subject.place(0, 0, :north)).to be_truthy
       end
 
-      it 'allows placing at 0,4' do
-        subject.place(0, 4, :north)
-        expect { subject.report }.to output("0,4,NORTH\n").to_stdout
-      end
-
-      it 'allows placing at 3,2' do
-        subject.place(3, 2, :north)
-        expect { subject.report }.to output("3,2,NORTH\n").to_stdout
-      end
+      include_examples 'within_bounds', 0, 4
+      include_examples 'within_bounds', 3, 2
 
       it 'allows turning' do
         subject.place(0, 0, :north)
@@ -87,9 +70,6 @@ describe Instructor do
 
   describe 'with bounds 8x8' do
     subject { described_class.build(width: 8, height: 8) }
-    it 'does allows us to place at 7,7' do
-      subject.place(7, 7, :north)
-      expect { subject.report }.to output("7,7,NORTH\n").to_stdout
-    end
+    include_examples 'within_bounds', 7, 7
   end
 end
