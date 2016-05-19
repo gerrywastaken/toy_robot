@@ -8,11 +8,6 @@ describe Robot do
       expect { subject.place(5, 4, :magnetic_north) }
         .to raise_error(InvalidDirextion)
     end
-
-    it 'raises exception if asked to face in an invalid direction' do
-      expect { subject.place(5, 4, :magnetic_north) }
-        .to raise_error(InvalidDirextion)
-    end
   end
 
   describe 'before placed' do
@@ -29,7 +24,7 @@ describe Robot do
     end
 
     it 'returns nil if asked to move' do
-      expect(subject.move { true } ).to be_nil
+      expect(subject.move { true }).to be_nil
     end
   end
 

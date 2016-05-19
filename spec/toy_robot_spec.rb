@@ -159,7 +159,7 @@ describe 'toy_robot', type: :feature do
   # Pipe commands to our toy robot program for slow but realistic testing
   def command_output_match_thorough(commands, expected_output)
     command_output = pipe_commands(commands)
-    expected_output += "\n" if !expected_output.empty?
+    expected_output += "\n" unless expected_output.empty?
     expect(command_output).to eql(expected_output)
   end
 
@@ -168,7 +168,7 @@ describe 'toy_robot', type: :feature do
   def command_output_match_fast(commands, expected_output)
     commands = commands.split("\n") if commands.respond_to?(:split)
     command_processor = CommandProcessor.build(input: commands)
-    expected_output += "\n" if !expected_output.empty?
+    expected_output += "\n" unless expected_output.empty?
     expect { command_processor.run }.to output(expected_output).to_stdout
   end
 
