@@ -38,25 +38,19 @@ describe Instructor do
 
       it 'allows turning' do
         subject.place(0, 0, :north)
-        subject.left
-        expect { subject.report }.to output("0,0,WEST\n").to_stdout
-        subject.right
-        expect { subject.report }.to output("0,0,NORTH\n").to_stdout
+        expect { subject.left.report }.to output("0,0,WEST\n").to_stdout
+        expect { subject.right.report }.to output("0,0,NORTH\n").to_stdout
       end
 
       it 'allows moving' do
         subject.place(0, 0, :north)
-        subject.move
-        expect { subject.report }.to output("0,1,NORTH\n").to_stdout
+        expect { subject.move.report }.to output("0,1,NORTH\n").to_stdout
       end
 
       it 'allows moving and turning' do
-        subject.place(0, 0, :north)
-        subject.move
-        subject.right
-        subject.move
-        subject.left
-        subject.move
+        subject.place(0, 0, :north).move
+               .right.move
+               .left.move
         expect { subject.report }.to output("1,2,NORTH\n").to_stdout
       end
 
