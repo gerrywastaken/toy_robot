@@ -44,22 +44,16 @@ describe Robot do
     end
 
     it 'can turn left' do
-      subject.place(0, 0, :east)
-      expect(subject.left).to be(:north)
+      subject.place(0, 0, :east).left
       expect(subject.report).to eql('0,0,NORTH')
-      expect(subject.left).to be(:west)
-      expect(subject.left).to be(:south)
-      expect(subject.left).to be(:east)
+      subject.left.left.left
       expect(subject.report).to eql('0,0,EAST')
     end
 
     it 'can turn right' do
-      subject.place(0, 0, :west)
-      expect(subject.right).to be(:north)
+      subject.place(0, 0, :west).right
       expect(subject.report).to eql('0,0,NORTH')
-      expect(subject.right).to be(:east)
-      expect(subject.right).to be(:south)
-      expect(subject.right).to be(:west)
+      subject.right.right.right
       expect(subject.report).to eql('0,0,WEST')
     end
   end
@@ -67,26 +61,22 @@ describe Robot do
   context 'assuming valid move' do
     describe 'can move' do
       it 'north' do
-        subject.place(0, 0, :north)
-        subject.move { true }
+        subject.place(0, 0, :north).move { true }
         expect(subject.report).to eql('0,1,NORTH')
       end
 
       it 'south' do
-        subject.place(0, 4, :south)
-        subject.move { true }
+        subject.place(0, 4, :south).move { true }
         expect(subject.report).to eql('0,3,SOUTH')
       end
 
       it 'east' do
-        subject.place(0, 0, :east)
-        subject.move { true }
+        subject.place(0, 0, :east).move { true }
         expect(subject.report).to eql('1,0,EAST')
       end
 
       it 'west' do
-        subject.place(4, 0, :west)
-        subject.move { true }
+        subject.place(4, 0, :west).move { true }
         expect(subject.report).to eql('3,0,WEST')
       end
     end
@@ -94,8 +84,8 @@ describe Robot do
 
   context 'assuming invalid move' do
     it 'does not move' do
-      subject.place(0, 0, :north)
-      expect { subject.move { false } }.to raise_error(InvalidMove)
+      expect { subject.place(0, 0, :north).move { false } }
+        .to raise_error(InvalidMove)
     end
   end
 end
