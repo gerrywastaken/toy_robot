@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'circular_list' # Used to make robot turning robot and readable
 
 group :development, :test do
+  # Required by Travis CI.
+  # see: https://docs.travis-ci.com/user/languages/ruby#Default-Test-Script
   gem 'rake'
 end
 
