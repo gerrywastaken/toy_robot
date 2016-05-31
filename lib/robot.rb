@@ -39,7 +39,8 @@ class Robot
   end
 
   def report
-    "#{@x_pos},#{@y_pos},#{@direction.upcase}" if placed?
+    return unless placed?
+    "#{@x_pos},#{@y_pos},#{@direction.upcase}"
   end
 
   def left
@@ -66,14 +67,10 @@ class Robot
   # Calculates the new postion one square in the direction the robot is facing.
   def next_move
     case @direction
-    when :north
-      [@x_pos, @y_pos + 1]
-    when :south
-      [@x_pos, @y_pos - 1]
-    when :east
-      [@x_pos + 1, @y_pos]
-    when :west
-      [@x_pos - 1, @y_pos]
+    when :north then [@x_pos, @y_pos + 1]
+    when :south then [@x_pos, @y_pos - 1]
+    when :east  then [@x_pos + 1, @y_pos]
+    when :west  then [@x_pos - 1, @y_pos]
     end
   end
 

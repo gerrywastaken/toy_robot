@@ -16,22 +16,17 @@ class Parser
 
   private
 
-  attr_reader :arguments
-
-  def arguments_hash
-    if command == :place
-      {
-        x_pos: x_pos,
-        y_pos: y_pos,
-        direction: direction
-      }
-    end
+  # Turns a string of:
+  #   "FOOBAR 1,2,3,4"
+  # into:
+  #   ['FOOBAR', ['1', '2', '3', '4']]
+  def split(input_line)
+    command, arguments = input_line.split
+    arguments = String(arguments).split(',')
+    [command, arguments]
   end
 
-  def valid_commands
-    %w(PLACE LEFT RIGHT MOVE REPORT)
-  end
-
+  # Returns the current command as a lowercase symbol, if valid
   def command
     if valid_commands.include?(@command)
       @command.downcase.to_sym
@@ -40,20 +35,29 @@ class Parser
     end
   end
 
+  def valid_commands
+    %w(PLACE LEFT RIGHT MOVE REPORT)
+  end
+
+  def arguments_hash
+    return {} if command != :place
+    {
+      x_pos: x_pos,
+      y_pos: y_pos,
+      direction: direction
+    }
+  end
+
   def x_pos
-    Integer(arguments[0])
+    Integer(@arguments[0])
   end
 
   def y_pos
-    Integer(arguments[1])
-  end
-
-  def valid_directions
-    %w(WEST NORTH EAST SOUTH)
+    Integer(@arguments[1])
   end
 
   def direction
-    direction = arguments[2]
+    direction = @arguments[2]
     if valid_directions.include?(direction)
       direction.downcase.to_sym
     else
@@ -61,9 +65,7 @@ class Parser
     end
   end
 
-  def split(input_line)
-    command, arguments = input_line.split
-    arguments = String(arguments).split(',')
-    [command, arguments]
+  def valid_directions
+    %w(WEST NORTH EAST SOUTH)
   end
 end

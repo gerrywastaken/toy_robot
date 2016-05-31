@@ -6,10 +6,8 @@ class Table
     @height = height
   end
 
+  # Determines if the given position still on the table?
   def valid_position?(x_pos, y_pos)
-    last_column = @width - 1
-    last_row = @height - 1
-    # (0..last_column).cover?(x_pos) && (0..last_row).cover?(y_pos)
-    x_pos.between?(0, last_column) && y_pos.between?(0, last_row)
+    (0...@width).cover?(x_pos) && (0...@height).cover?(y_pos)
   end
 end

@@ -14,13 +14,12 @@ module SpecHelpers
 
   # Generates arguments part of Parser.read output
   def arguments_hash(argument_string)
-    if argument_string
-      arguments = argument_string.split(',')
-      {
-        x_pos: arguments[0].to_i,
-        y_pos: arguments[1].to_i,
-        direction: arguments[2].downcase.to_sym
-      }
-    end
+    return {} unless argument_string
+    arguments = argument_string.split(',')
+    {
+      x_pos: arguments[0].to_i,
+      y_pos: arguments[1].to_i,
+      direction: arguments[2].downcase.to_sym
+    }
   end
 end
