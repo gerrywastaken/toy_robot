@@ -53,7 +53,7 @@ REPORT
 ```
 
 
-#### Edited specifications
+#### Edited specification
 
 The original specifications are available within full_spec.md. This file just contains a rewording of the original to group and simplify concepts.
 
