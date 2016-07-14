@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'circular_list' # Used to make robot turning robot and readable
+gem 'circular_list' # Used to make robot turning easy and readable
 
 group :development, :test do
   # Required by Travis CI.
