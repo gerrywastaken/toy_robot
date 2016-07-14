@@ -3,3 +3,10 @@ UtilityFunction:
   exclude:
   # Intentional to keep specs simple
   - SpecHelpers#arguments_hash
+RepeatedConditional:
+  exclude:
+  # This repeated conditional is intentional. While it might not be ideal,
+  # separating the robot out to two classes would only add complexity and reduce
+  # readability. I would observe this guideline in cases where it improved the
+  # code.
+  - Robot
