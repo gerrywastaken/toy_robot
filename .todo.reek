@@ -1,19 +1,4 @@
 ---
-# Ignoring these warnings as the code is a patch of a Ruby
-# core component that I don't want to risk changing more
-# thank I have. The faults listed below unfortunately exist
-# in the Ruby code base.
-FeatureEnvy:
-  exclude:
-  - CoreExtensions#on_heredoc_dedent
-UncommunicativeParameterName:
-  exclude:
-  - CoreExtensions#on_heredoc_dedent
-  - CoreExtensions#on_heredoc_dedent
-UncommunicativeVariableName:
-  exclude:
-  - CoreExtensions#on_heredoc_dedent
-  - CoreExtensions#on_heredoc_dedent
 UtilityFunction:
   exclude:
   # Intentional to keep specs simple
