@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby --enable-frozen-string-literal
+#!/usr/bin/env ruby
 require './lib/command_processor'
 
 command_processor = CommandProcessor.build
