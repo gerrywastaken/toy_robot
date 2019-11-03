@@ -10,9 +10,9 @@ end
 
 group :development do
   # Linting tools
-  gem 'guard-yield' # run a proc that on guard hooks without extra gems
-  gem 'guard-rspec', require: false # rerun tests
   gem 'fuubar', require: false # Allows seeing failures immediately
+  gem 'guard-rspec', require: false # rerun tests
+  gem 'guard-yield' # run a proc that on guard hooks without extra gems
 
   gem 'reek', require: false
   gem 'rubocop', require: false
@@ -20,10 +20,10 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
-
   gem 'pry-rescue' # inspecting failing tests
   gem 'pry-stack_explorer' # needed by pry-rescue
+
+  gem 'rspec'
 
   gem 'simplecov', require: false
 end
