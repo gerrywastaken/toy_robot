@@ -1,6 +1,6 @@
 # Toy Robot
 
-![](https://github.com/gerrywastaken/toy_robot/workflows/Ruby/badge.svg)
+[![Build status](https://github.com/gerrywastaken/toy_robot/workflows/Ruby/badge.svg)](https://github.com/gerrywastaken/toy_robot/actions)
 
 This is a simple program for moving a robot around on a platform.
 
@@ -128,3 +128,5 @@ Output: 3,3,NORTH
 
   Typo aside, in my interpretation of the spec, I replaced <strong>can choose the</strong> with <strong>should</strong>. Trying to apply relative movements or reporting, for a robot that has not yet been placed, does not make sense. I suspect this was the original intent of the phrase.</dd>
 </dl>
+
+[ss1]: 
