@@ -24,7 +24,7 @@ class CommandProcessor
   def run_line(line)
     command, arguments = @parser.read(line).values_at(:command, :arguments)
     @instructor.send(command, *arguments.values)
-  rescue ParseError, OutsideBounds => exception
-    puts exception.message
+  rescue ParseError, OutsideBounds => e
+    puts e.message
   end
 end

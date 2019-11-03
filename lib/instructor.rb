@@ -38,8 +38,8 @@ class Instructor
   def move
     @robot.move { |x_pos, y_pos| @platform.valid_position?(x_pos, y_pos) }
     self
-  rescue InvalidMove => exception
-    puts exception.message
+  rescue InvalidMove => e
+    puts e.message
   end
 
   def report
