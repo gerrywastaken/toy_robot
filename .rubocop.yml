@@ -1,7 +1,9 @@
+inherit_from: .rubocop_todo.yml
+
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
 
 # I am enabling frozen strings via the command line switch
 # (--enable-frozen-string-literal), so as not to polute every file with an

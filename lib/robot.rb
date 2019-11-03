@@ -40,17 +40,20 @@ class Robot
 
   def report
     return unless placed?
+
     "#{@x_pos},#{@y_pos},#{@direction.upcase}"
   end
 
   def left
     return unless placed?
+
     @direction = @direction_helper.fetch_before(@direction)
     self
   end
 
   def right
     return unless placed?
+
     @direction = @direction_helper.fetch_after(@direction)
     self
   end

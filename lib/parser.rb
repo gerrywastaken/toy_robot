@@ -41,6 +41,7 @@ class Parser
 
   def arguments_hash
     return {} if command != :place
+
     {
       x_pos: x_pos,
       y_pos: y_pos,

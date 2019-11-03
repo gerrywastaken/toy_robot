@@ -15,6 +15,7 @@ module SpecHelpers
   # Generates arguments part of Parser.read output
   def arguments_hash(argument_string)
     return {} unless argument_string
+
     arguments = argument_string.split(',')
     {
       x_pos: arguments[0].to_i,
