@@ -1,6 +1,6 @@
 # Toy Robot
 
-[![Build Status](https://travis-ci.org/gerrywastaken/toy_robot.svg?branch=master)](https://travis-ci.org/gerrywastaken/toy_robot)
+![](https://github.com/gerrywastaken/toy_robot/workflows/Ruby/badge.svg)
 
 This is a simple program for moving a robot around on a platform.
 
